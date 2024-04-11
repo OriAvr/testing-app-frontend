@@ -3,18 +3,28 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 function fetchCourses() {
-  fetch("http://your-backend-api-url/courses")
+  fetch("http://localhost:3000/courses")
     .then((response) => response.json())
-    .then((data) => displayCourses(data))
+    .then((data) => populateTable(data))
     .catch((error) => console.error("Error fetching courses:", error));
 }
 
-function displayCourses(courses) {
-  const coursesElement = document.getElementById("courses");
-  coursesElement.innerHTML = ""; // Clear existing courses
+function populateTable(courses) {
+  const tableBody = document
+    .getElementById("coursesTable")
+    .getElementsByTagName("tbody")[0];
   courses.forEach((course) => {
-    const courseElement = document.createElement("div");
-    courseElement.textContent = course.name; // Assume each course has a 'name'
-    coursesElement.appendChild(courseElement);
+    let row = tableBody.insertRow();
+    let nameCell = row.insertCell(0);
+    nameCell.textContent = course.name;
+
+    let descriptionCell = row.insertCell(1);
+    descriptionCell.textContent = course.description;
+
+    let imageCell = row.insertCell(2);
+    let image = document.createElement("img");
+    image.src = course.image_key;
+    image.alt = course.name;
+    imageCell.appendChild(image);
   });
 }
