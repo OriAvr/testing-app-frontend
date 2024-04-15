@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 function fetchCourses() {
-  fetch(`http://${PRIVATE_IP}:3000/courses`)
+  fetch(`http://${process.env.PRIVATE_IP}:3000/courses`)
     .then((response) => response.json())
     .then((data) => populateTable(data))
     .catch((error) => console.error("Error fetching courses:", error));
