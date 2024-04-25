@@ -1,5 +1,3 @@
-import { server_ip } from "server_ip.js";
-
 document.addEventListener("DOMContentLoaded", function () {
   fetchCourses();
 });
